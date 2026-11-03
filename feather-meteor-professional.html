@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="Feather Meteor is an independent Minecraft Fabric client. Explore builds for Minecraft 1.21.11, 1.21.4 and 26.3.">
+  <title>Feather Meteor — Minecraft Client</title>
+  <style>
+    :root{--bg:#080b14;--panel:#101624;--panel2:#131c2d;--line:rgba(167,190,225,.14);--text:#f4f7ff;--muted:#9aa8bd;--cyan:#65e4e9;--violet:#9b8cff;--max:1160px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+    a{color:inherit;text-decoration:none}
+    .bg-glow{position:absolute;inset:0 0 auto;height:760px;pointer-events:none;overflow:hidden;z-index:-1;background:radial-gradient(ellipse at 75% 8%,rgba(91,103,255,.19),transparent 38%),radial-gradient(ellipse at 20% 30%,rgba(37,208,218,.12),transparent 35%)}
+    .wrap{width:min(var(--max),calc(100% - 44px));margin:auto}
+    header{height:82px;border-bottom:1px solid var(--line);display:flex;align-items:center}
+    nav{display:flex;align-items:center;justify-content:space-between;width:100%}
+    .brand{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:850;letter-spacing:.16em}
+    .mark{width:37px;height:37px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#07101a;font-size:21px;box-shadow:0 0 28px rgba(101,228,233,.2)}
+    .navlinks{display:flex;gap:30px;align-items:center;color:var(--muted);font-size:13px}
+    .navlinks a:hover{color:var(--cyan)}
+    .nav-cta{padding:10px 16px;border:1px solid rgba(101,228,233,.42);border-radius:9px;color:var(--cyan)}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:64px;padding:92px 0 86px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}
+    .dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;box-shadow:0 0 12px var(--cyan)}
+    h1{font-size:clamp(52px,7vw,88px);line-height:.98;letter-spacing:-.075em;margin:20px 0 22px;font-weight:850}
+    h1 span{display:block;background:linear-gradient(100deg,var(--cyan),#a7a0ff 72%);background-clip:text;-webkit-background-clip:text;color:transparent}
+    .intro{max-width:520px;color:var(--muted);font-size:16px;line-height:1.85}
+    .hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 18px;border-radius:9px;font-size:13px;font-weight:750;transition:.2s;border:1px solid transparent}
+    .btn-primary{background:linear-gradient(105deg,var(--cyan),#9ca1ff);color:#07101a;box-shadow:0 8px 30px rgba(101,228,233,.12)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(101,228,233,.22)}
+    .btn-ghost{border-color:var(--line);color:#dbe5f5;background:rgba(255,255,255,.025)}
+    .btn-ghost:hover{border-color:rgba(101,228,233,.45);color:var(--cyan)}
+    .hero-art{min-height:390px;position:relative;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:linear-gradient(145deg,rgba(24,36,60,.96),rgba(10,15,27,.97));display:grid;place-items:center;box-shadow:0 30px 90px rgba(0,0,0,.25)}
+    .hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid rgba(117,211,226,.19);border-radius:50%;width:330px;height:330px}
+    .hero-art:after{width:245px;height:245px;border-color:rgba(155,140,255,.25)}
+    .orbit{position:absolute;width:420px;height:155px;border:1px solid rgba(101,228,233,.5);border-radius:50%;transform:rotate(-34deg);box-shadow:0 0 24px rgba(101,228,233,.08)}
+    .emblem{z-index:1;width:142px;height:142px;border-radius:36px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(101,228,233,.17),rgba(155,140,255,.18));border:1px solid rgba(171,215,255,.38);font-size:78px;color:#e8ffff;text-shadow:0 0 30px rgba(101,228,233,.6);transform:rotate(-8deg);box-shadow:0 0 70px rgba(101,228,233,.13)}
+    .art-label{position:absolute;left:25px;right:25px;bottom:22px;display:flex;justify-content:space-between;color:#9eacc2;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+    .art-code{position:absolute;top:23px;left:25px;color:#9eacc2;font-size:10px;letter-spacing:.18em}
+    .trust-strip{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:14px;background:rgba(16,22,36,.7);margin-bottom:92px}
+    .trust-item{padding:21px 25px;border-right:1px solid var(--line)}
+    .trust-item:last-child{border:0}
+    .trust-item strong{display:block;font-size:17px;letter-spacing:-.02em}
+    .trust-item span{font-size:11px;color:var(--muted)}
+    .section-top{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:25px}
+    .section-kicker{font-size:10px;color:var(--cyan);font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+    h2{font-size:clamp(30px,4vw,43px);letter-spacing:-.055em;margin:8px 0 0}
+    .section-desc{max-width:370px;color:var(--muted);font-size:13px;line-height:1.75;margin:0}
+    .versions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{position:relative;display:flex;flex-direction:column;min-height:300px;padding:25px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(155deg,rgba(19,28,45,.94),rgba(12,17,29,.96));transition:.22s;overflow:hidden}
+    .card:hover{transform:translateY(-5px);border-color:rgba(101,228,233,.4);box-shadow:0 18px 45px rgba(0,0,0,.22)}
+    .card:before{content:"";position:absolute;width:180px;height:180px;right:-90px;top:-100px;border-radius:50%;background:rgba(101,228,233,.08);filter:blur(8px)}
+    .card-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .version-label{font-size:10px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+    .pill{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;border:1px solid rgba(101,228,233,.25);border-radius:30px;color:var(--cyan)}
+    .version{font-size:36px;font-weight:850;letter-spacing:-.06em;margin:24px 0 5px}
+    .game-label{font-size:12px;color:var(--muted)}
+    .card p{font-size:12px;color:#aab6c9;line-height:1.75;margin:19px 0 25px}
+    .card .btn{width:100%;margin-top:auto}
+    .card .btn-outline{background:transparent;border-color:rgba(155,140,255,.38);color:#c5bcff}
+    .card .btn-outline:hover{background:rgba(155,140,255,.1)}
+    .info{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;padding:84px 0 90px}
+    .info h2{margin:0}
+    .info-copy{color:var(--muted);font-size:14px;line-height:1.9}
+    .notice{margin-top:18px;padding:16px 18px;border-radius:10px;background:rgba(101,228,233,.055);border:1px solid rgba(101,228,233,.17);color:#b8c9d9;font-size:12px;line-height:1.8}
+    .notice b{color:var(--cyan)}
+    footer{border-top:1px solid var(--line);padding:27px 0;color:var(--muted);font-size:11px}
+    .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+    .foot a{color:#c9d5e7}
+    @media(max-width:850px){.hero{gap:30px;grid-template-columns:1fr;padding:68px 0}.hero-art{min-height:320px}.trust-strip{margin-bottom:70px}.info{gap:25px}}
+    @media(max-width:680px){.wrap{width:min(100% - 32px,var(--max))}header{height:70px}.navlinks{gap:14px}.navlinks a:not(.nav-cta){display:none}.hero{padding:56px 0 48px}.hero-art{min-height:290px}.trust-strip{grid-template-columns:1fr}.trust-item{border-right:0;border-bottom:1px solid var(--line);padding:16px 20px}.trust-item:last-child{border-bottom:0}.section-top{display:block}.section-desc{margin-top:12px}.versions{grid-template-columns:1fr}.card{min-height:260px}.info{grid-template-columns:1fr;padding:65px 0}.version{font-size:34px}}
+  </style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#"><span class="mark">✦</span><span>FEATHER METEOR</span></a>
+      <div class="navlinks">
+        <a href="#downloads">Downloads</a>
+        <a href="#about">About</a>
+        <a class="nav-cta" href="https://github.com/plfake39-dev/Feather_meteor-client" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> INDEPENDENT MINECRAFT CLIENT</div>
+      <h1>Make your next world <span>yours.</span></h1>
+      <p class="intro">Meet Feather Meteor — a custom Minecraft Fabric client built as an independent project. Choose the build that matches your Minecraft version and get started.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#downloads">Explore downloads <span>↓</span></a>
+        <a class="btn btn-ghost" href="https://github.com/plfake39-dev/Feather_meteor-client" target="_blank" rel="noopener">View source code ↗</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="art-code">FM / PROJECT 2026</div>
+      <div class="orbit"></div>
+      <div class="emblem">✦</div>
+      <div class="art-label"><span>FEATHER METEOR</span><span>CRAFTED FOR PLAY</span></div>
+    </div>
+  </section>
+
+  <section class="trust-strip" aria-label="Project details">
+    <div class="trust-item"><strong>3 Builds</strong><span>Separate Minecraft versions</span></div>
+    <div class="trust-item"><strong>Fabric</strong><span>Mod loader ecosystem</span></div>
+    <div class="trust-item"><strong>Open Project</strong><span>Source available on GitHub</span></div>
+  </section>
+
+  <section id="downloads">
+    <div class="section-top">
+      <div><div class="section-kicker">GET THE CLIENT</div><h2>Choose your version.</h2></div>
+      <p class="section-desc">Select your Minecraft version below. Make sure the game version and required dependencies match the build you install.</p>
+    </div>
+    <div class="versions">
+      <article class="card">
+        <div class="card-head"><span class="version-label">Minecraft version</span><span class="pill">Build history</span></div>
+        <div class="version">1.21.11</div>
+        <div class="game-label">Feather Meteor · v3.1.0 history</div>
+        <p>Open the project's v3.1.0 commit history for the Minecraft 1.21.11 build information.</p>
+        <a class="btn btn-outline" href="https://github.com/plfake39-dev/Feather_meteor-client/commits/v3.1.0" target="_blank" rel="noopener">View 1.21.11 build <span>↗</span></a>
+      </article>
+      <article class="card">
+        <div class="card-head"><span class="version-label">Minecraft version</span><span class="pill">JAR download</span></div>
+        <div class="version">1.21.4</div>
+        <div class="game-label">Feather Meteor · v1.0.0</div>
+        <p>Get the supplied Feather Meteor JAR package for Minecraft 1.21.4.</p>
+        <a class="btn btn-primary" href="https://github.com/plfake39-dev/Feather_meteor-client/releases/download/V1.21.4/feather-meteor-1.0.0-1.21.4.jar" target="_blank" rel="noopener">Download for 1.21.4 <span>↓</span></a>
+      </article>
+      <article class="card">
+        <div class="card-head"><span class="version-label">Minecraft version</span><span class="pill">JAR download</span></div>
+        <div class="version">26.3</div>
+        <div class="game-label">Feather Meteor · v3.3.0</div>
+        <p>Get the supplied Feather Meteor JAR package for Minecraft 26.3.</p>
+        <a class="btn btn-primary" href="https://github.com/plfake39-dev/Feather_meteor-client/releases/download/v3.1.0/feather-meteor-3.3.0.jar" target="_blank" rel="noopener">Download for 26.3 <span>↓</span></a>
+      </article>
+    </div>
+  </section>
+
+  <section class="info" id="about">
+    <div><div class="section-kicker">ABOUT THE PROJECT</div><h2>A client with its own identity.</h2></div>
+    <div class="info-copy">
+      Feather Meteor is an independently developed Minecraft client project. This page brings the available version links together in one place, making it easier to find the build you need.
+      <div class="notice"><b>Compatibility notice</b><br>The 1.21.11 option currently opens the v3.1.0 commit history; it is not a direct JAR download. Add the 1.21.11 release asset URL when that package is available. Always check compatibility before launching.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 FEATHER METEOR. INDEPENDENT PROJECT.</span>
+    <a href="https://github.com/plfake39-dev/Feather_meteor-client" target="_blank" rel="noopener">GitHub Repository ↗</a>
+  </div>
+</footer>
+</body>
+</html>
