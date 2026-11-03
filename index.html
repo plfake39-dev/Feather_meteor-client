@@ -1,103 +1,677 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f4f1eb">
-<meta name="description" content="Feather Meteor 3.2.0 — a Minecraft 26.3 Fabric client.">
-<title>Feather Meteor — Crafted for 26.3</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b13">
+<title>FEATHER METEOR — Beyond Vanilla</title>
+
 <style>
-:root{--paper:#f4f1eb;--ink:#171714;--muted:#77766f;--line:#d8d4cb;--accent:#c35a37;--dark:#1d1e1b;--cream:#e9e4d9}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-a{color:inherit}
-.shell{width:min(1180px,calc(100% - 48px));margin:auto}
-nav{height:84px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
-.wordmark{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:900;letter-spacing:.17em}
-.symbol{width:35px;height:35px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:18px}
-.nav-right{font-size:11px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
-.hero{display:grid;grid-template-columns:1.04fr .96fr;gap:8%;align-items:center;padding:90px 0 86px}
-.kicker{display:flex;align-items:center;gap:12px;color:var(--accent);font-size:11px;font-weight:850;letter-spacing:.2em;text-transform:uppercase}
-.kicker:before{content:"";width:34px;height:1px;background:var(--accent)}
-h1{font-size:clamp(58px,8.4vw,112px);line-height:.88;letter-spacing:-.085em;font-weight:850;margin:25px 0 24px}
-h1 span{display:block;color:var(--accent);font-family:Georgia,serif;font-style:italic;font-weight:500;letter-spacing:-.075em}
-.lede{max-width:470px;color:#5e5d57;font-size:17px;line-height:1.8}
-.actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:34px}
-.download{display:inline-flex;align-items:center;gap:22px;background:var(--ink);color:white;text-decoration:none;padding:17px 21px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:background .2s,transform .2s}
-.download:hover{background:var(--accent);transform:translateY(-2px)}
-.download .arrow{font-size:20px;font-weight:400}
-.release-link{font-size:12px;color:var(--muted);text-decoration:none;border-bottom:1px solid #aaa69d;padding-bottom:4px}
-.visual{min-height:480px;background:var(--dark);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.visual:before{content:"";position:absolute;width:430px;height:430px;border:1px solid #77786d;border-radius:50%;opacity:.38}
-.visual:after{content:"";position:absolute;width:330px;height:330px;border:1px solid #77786d;border-radius:50%;opacity:.32}
-.orbit{position:absolute;width:470px;height:180px;border:1px solid #bd6647;border-radius:50%;transform:rotate(-37deg)}
-.core{position:relative;z-index:2;width:210px;height:260px;display:flex;align-items:center;justify-content:center}
-.feather{font-size:180px;line-height:1;color:#eee9dd;transform:rotate(-28deg);text-shadow:10px 14px 0 #c35a37}
-.visual-caption{position:absolute;bottom:25px;left:28px;right:28px;display:flex;justify-content:space-between;color:#aaa99f;font-size:9px;letter-spacing:.19em;text-transform:uppercase}
-.visual-index{position:absolute;top:24px;left:28px;color:#aaa99f;font-size:10px;letter-spacing:.2em}
-.specs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.spec{padding:24px 20px 25px 0;border-right:1px solid var(--line);margin:18px 0 18px 20px}
-.spec:first-child{margin-left:0}
-.spec:last-child{border:0}
-.spec small{display:block;color:var(--muted);font-size:9px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
-.spec strong{font-size:15px;font-weight:750}
-.lower{display:grid;grid-template-columns:1fr 1fr;gap:9%;padding:80px 0}
-.lower h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.055em;line-height:1.05;margin:0}
-.lower p{margin:0;color:#66655e;line-height:1.85;font-size:14px}
-.note{padding:19px 22px;background:#e9e4d9;border-left:2px solid var(--accent);font-size:12px;color:#55534d;line-height:1.7;margin-top:25px}
-footer{background:var(--dark);color:#e9e4d9;padding:30px 0}
-.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.foot small{color:#aaa99f;font-size:10px;letter-spacing:.12em}
-.foot a{font-size:11px;text-decoration:none;border-bottom:1px solid #777;padding-bottom:4px}
-@media(max-width:780px){.shell{width:min(100% - 34px,600px)}nav{height:70px}.nav-right{font-size:9px}.hero{grid-template-columns:1fr;padding:62px 0 52px;gap:40px}.visual{min-height:360px}.core{transform:scale(.78)}.visual:before{width:320px;height:320px}.visual:after{width:245px;height:245px}.orbit{width:350px}.specs{grid-template-columns:repeat(2,1fr)}.spec:nth-child(2){border-right:0}.spec:nth-child(3){margin-left:0}.lower{grid-template-columns:1fr;gap:20px;padding:55px 0}}
-@media(max-width:420px){h1{font-size:58px}.actions{align-items:flex-start;flex-direction:column}.download{width:100%;justify-content:space-between}.visual{min-height:320px}}
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --bg: #080b13;
+  --line: #8caeff26;
+  --muted: #94a0b8;
+  --cyan: #71e6ff;
+  --violet: #9b83ff;
+  --lime: #c6ff7b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 15% 8%, #315bff30, transparent 34%),
+    radial-gradient(ellipse at 85% 22%, #00ddff1c, transparent 30%),
+    #080b13;
+  color: #f4f7ff;
+  font-family: Manrope, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+body:before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: .15;
+  background-image:
+    linear-gradient(#8caeff22 1px, transparent 1px),
+    linear-gradient(90deg, #8caeff22 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+.wrap {
+  width: min(1120px, calc(100% - 40px));
+  margin: auto;
+}
+
+nav {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  color: #07101a;
+  font-size: 21px;
+  box-shadow: 0 0 30px #71e6ff55;
+}
+
+.navlinks {
+  display: flex;
+  gap: 27px;
+  align-items: center;
+  font: 10px 'DM Mono';
+  letter-spacing: .12em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.navlinks a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navlinks a:hover {
+  color: var(--cyan);
+}
+
+.navlinks .pill {
+  border: 1px solid #71e6ff66;
+  border-radius: 30px;
+  padding: 10px 14px;
+  color: var(--cyan);
+}
+
+.hero {
+  min-height: 650px;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 30px;
+  padding: 65px 0;
+}
+
+.eyebrow,
+.kicker {
+  font: 10px 'DM Mono';
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.eyebrow:before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--lime);
+  border-radius: 50%;
+  margin-right: 10px;
+  box-shadow: 0 0 12px var(--lime);
+}
+
+h1 {
+  font-size: clamp(55px, 8vw, 100px);
+  line-height: .9;
+  letter-spacing: -.08em;
+  margin: 25px 0;
+  font-weight: 900;
+}
+
+h1 span {
+  display: block;
+  background: linear-gradient(100deg, #fff, #8ceaff 55%, #a994ff);
+  color: transparent;
+  background-clip: text;
+}
+
+.lead {
+  max-width: 500px;
+  color: #a8b3c9;
+  line-height: 1.85;
+  font-size: 15px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 21px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  transition: .2s;
+  text-decoration: none;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+}
+
+.primary {
+  background: linear-gradient(105deg, var(--cyan), #a49aff);
+  color: #07101a;
+  box-shadow: 0 12px 35px #71e6ff2b;
+}
+
+.secondary {
+  border: 1px solid var(--line);
+  background: #ffffff08;
+  color: #e9efff;
+}
+
+.micro {
+  margin-top: 17px;
+  color: #6d7890;
+  font: 10px 'DM Mono';
+  letter-spacing: .1em;
+}
+
+.visual {
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.orbit {
+  width: min(410px, 88vw);
+  aspect-ratio: 1;
+  border: 1px solid #8caeff30;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 90px #4a7aff15, inset 0 0 70px #4a7aff0c;
+}
+
+.orbit:before,
+.orbit:after {
+  content: "";
+  position: absolute;
+  inset: 35px;
+  border: 1px solid #8caeff22;
+  border-radius: 50%;
+}
+
+.orbit:after {
+  inset: 76px;
+  border-style: dashed;
+  animation: spin 35s linear infinite;
+}
+
+.emblem {
+  width: 220px;
+  filter: drop-shadow(0 0 40px #5edfff66);
+  z-index: 1;
+}
+
+.float {
+  position: absolute;
+  padding: 12px 14px;
+  border: 1px solid #8caeff38;
+  background: #101a2ddd;
+  border-radius: 12px;
+  color: #dceaff;
+  font: 10px 'DM Mono';
+  letter-spacing: .08em;
+  box-shadow: 0 12px 40px #0007;
+}
+
+.f1 {
+  top: 55px;
+  right: 0;
+}
+
+.f2 {
+  bottom: 50px;
+  left: 0;
+}
+
+.f3 {
+  top: 48%;
+  right: -5px;
+  color: var(--lime);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #101827aa;
+  overflow: hidden;
+}
+
+.stat {
+  padding: 23px 28px;
+  border-right: 1px solid var(--line);
+}
+
+.stat:last-child {
+  border: 0;
+}
+
+.stat strong {
+  display: block;
+  font-size: 22px;
+}
+
+.stat small {
+  font: 10px 'DM Mono';
+  letter-spacing: .13em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+section.content {
+  padding: 100px 0;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.head h2,
+.download h2 {
+  font-size: clamp(32px, 5vw, 51px);
+  letter-spacing: -.06em;
+  margin: 10px 0 0;
+}
+
+.head p,
+.download p {
+  max-width: 370px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.card {
+  padding: 25px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: linear-gradient(145deg, #141e31dd, #0d1320dd);
+  min-height: 195px;
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #71e6ff77;
+}
+
+.ico {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #71e6ff14;
+  color: var(--cyan);
+  font-size: 21px;
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin: 0 0 9px;
+}
+
+.card p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.download {
+  padding: 42px;
+  border: 1px solid #71e6ff55;
+  border-radius: 23px;
+  background:
+    radial-gradient(ellipse at 90% 0%, #766aff2b, transparent 45%),
+    linear-gradient(120deg, #111e30, #101321);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.download p {
+  max-width: 560px;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  margin-top: 95px;
+  padding: 32px 0 42px;
+  display: flex;
+  justify-content: space-between;
+  color: #68748b;
+  font: 10px 'DM Mono';
+  letter-spacing: .1em;
+}
+
+@media(max-width:760px) {
+  .navlinks a:not(.pill) {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 55px 0;
+  }
+
+  .visual {
+    min-height: 340px;
+    grid-row: 1;
+  }
+
+  .hero-copy {
+    grid-row: 2;
+  }
+
+  .f1 {
+    right: 2%;
+  }
+
+  .f2 {
+    left: 2%;
+  }
+
+  .content {
+    padding: 70px 0 !important;
+  }
+
+  .head {
+    display: block;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat:last-child {
+    border: 0;
+  }
+
+  .download {
+    display: block;
+    padding: 27px;
+  }
+
+  .download .btn {
+    margin-top: 12px;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  * {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="shell">
+<div class="wrap">
+
 <nav>
-  <div class="wordmark"><span class="symbol">✦</span><span>FEATHER / METEOR</span></div>
-  <div class="nav-right">Independent client project · 2026</div>
+  <a class="brand" href="#">
+    <span class="mark">✦</span>
+    FEATHER METEOR
+  </a>
+
+  <div class="navlinks">
+    <a href="#features">Features</a>
+    <a href="#details">Details</a>
+    <a class="pill" href="#download">Get client ↗</a>
+  </div>
 </nav>
 
 <main>
+
 <section class="hero">
-  <div>
-    <div class="kicker">Minecraft Fabric Client</div>
-    <h1>Play beyond<span>ordinary.</span></h1>
-    <p class="lede">Meet Feather Meteor 3.2.0 — a custom client build prepared for Minecraft 26.3 with the Fabric mod loader.</p>
-    <div class="actions">
-      <a class="download" href="https://github.com/plfake39-dev/Feather_meteor-client/releases/download/v3.1.0/feather-meteor-3.2.0.jar">
-        <span>Get the client</span><span class="arrow">↗</span>
-      </a>
-      <a class="release-link" href="https://github.com/plfake39-dev/Feather_meteor-client/releases">Release archive</a>
+
+<div class="hero-copy">
+  <div class="eyebrow">FABRIC CLIENT · BUILD 3.3.0</div>
+
+  <h1>BEYOND<span>VANILLA.</span></h1>
+
+  <p class="lead">
+    A sharper Minecraft experience. Feather Meteor brings a bold
+    identity to your setup — clean, focused, and made for players
+    who want every session to feel different.
+  </p>
+
+  <div class="actions">
+    <a class="btn primary"
+       href="https://github.com/plfake39-dev/Feather_meteor-client/releases/download/v3.1.0/feather-meteor-3.3.0.jar"
+       target="_blank" rel="noopener">
+       ↓ DOWNLOAD CLIENT ↗
+    </a>
+
+    <a class="btn secondary"
+       href="https://github.com/plfake39-dev/Feather_meteor-client"
+       target="_blank" rel="noopener">
+       VIEW SOURCE ↗
+    </a>
+  </div>
+
+  <div class="micro">
+    MINECRAFT 26.3 · FABRIC · JAR RELEASE
+  </div>
+</div>
+
+<div class="visual">
+  <div class="orbit"></div>
+
+  <svg class="emblem" viewBox="0 0 240 280"
+       fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <path d="M181 25C107 38 46 95 45 171C44 220 79 251 120 246C167 241 196 194 184 151C173 111 129 96 99 119C72 140 78 179 105 191C127 201 148 185 147 165"
+          stroke="url(#g)" stroke-width="8" stroke-linecap="round"/>
+
+    <path d="M183 25L207 11L196 42"
+          stroke="#8CEAFF" stroke-width="5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="M45 171L18 151M45 171L17 190M120 246L111 273M120 246L143 268"
+          stroke="#9C8AFF" stroke-width="3" stroke-linecap="round"/>
+
+    <circle cx="147" cy="165" r="8" fill="#C6FF7B"/>
+
+    <path d="M147 165L208 118"
+          stroke="#C6FF7B" stroke-width="2" stroke-dasharray="4 7"/>
+
+    <defs>
+      <linearGradient id="g" x1="45" y1="246" x2="207" y2="11">
+        <stop stop-color="#9B83FF"/>
+        <stop offset=".55" stop-color="#71E6FF"/>
+        <stop offset="1" stop-color="#fff"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="float f1">✧ FEATHER CORE / 03</div>
+  <div class="float f2">STATUS: READY</div>
+  <div class="float f3">● 26.3 TARGET</div>
+</div>
+
+</section>
+
+<div class="stats">
+  <div class="stat">
+    <strong>3.3.0</strong>
+    <small>Release label</small>
+  </div>
+
+  <div class="stat">
+    <strong>26.3</strong>
+    <small>Minecraft target</small>
+  </div>
+
+  <div class="stat">
+    <strong>FABRIC</strong>
+    <small>Mod loader</small>
+  </div>
+</div>
+
+<section class="content" id="features">
+  <div class="head">
+    <div>
+      <div class="kicker">01 / THE EXPERIENCE</div>
+      <h2>Built to stand out.</h2>
+    </div>
+    <p>
+      A bold identity for your Minecraft setup, with a focused
+      presentation that keeps the client front and center.
+    </p>
+  </div>
+
+  <div class="cards">
+    <article class="card">
+      <div class="ico">✦</div>
+      <h3>Distinct identity</h3>
+      <p>A custom Feather Meteor look with a crisp visual style and clear release identity.</p>
+    </article>
+
+    <article class="card">
+      <div class="ico">⌘</div>
+      <h3>Fabric ecosystem</h3>
+      <p>Designed around Fabric. Match your Minecraft, loader, and dependency versions before installing.</p>
+    </article>
+
+    <article class="card">
+      <div class="ico">↗</div>
+      <h3>Open project</h3>
+      <p>Visit the GitHub repository to review the source, releases, and project information.</p>
+    </article>
+  </div>
+</section>
+
+<section class="content" id="details">
+  <div class="head">
+    <div>
+      <div class="kicker">02 / QUICK DETAILS</div>
+      <h2>Know your build.</h2>
     </div>
   </div>
-  <div class="visual" aria-label="Abstract feather and orbit artwork">
-    <div class="visual-index">FM — 032</div>
-    <div class="orbit"></div>
-    <div class="core"><span class="feather">✦</span></div>
-    <div class="visual-caption"><span>Feather Meteor</span><span>Version 3.2.0</span></div>
+
+  <div class="cards">
+    <article class="card">
+      <div class="ico">▦</div>
+      <h3>Game version</h3>
+      <p>Minecraft 26.3 — verify the JAR metadata and dependencies before launching.</p>
+    </article>
+
+    <article class="card">
+      <div class="ico">◇</div>
+      <h3>Loader</h3>
+      <p>Fabric. Use a compatible Fabric Loader and any required libraries listed by the project.</p>
+    </article>
+
+    <article class="card">
+      <div class="ico">⬇</div>
+      <h3>Install</h3>
+      <p>Download the JAR and follow the installation instructions in the repository.</p>
+    </article>
   </div>
 </section>
 
-<section class="specs" aria-label="Release specifications">
-  <div class="spec"><small>Client release</small><strong>3.2.0</strong></div>
-  <div class="spec"><small>Minecraft</small><strong>26.3</strong></div>
-  <div class="spec"><small>Mod loader</small><strong>Fabric</strong></div>
-  <div class="spec"><small>Package</small><strong>Java · JAR</strong></div>
-</section>
-
-<section class="lower">
-  <h2>Designed to feel different.<br><em>Built for your next world.</em></h2>
+<section class="download" id="download">
   <div>
-    <p>Feather Meteor brings its own identity to a Fabric-based Minecraft setup. Download the release package and use it only with a compatible Minecraft and Fabric environment.</p>
-    <div class="note"><strong>Compatibility note</strong><br>Confirm that this build and its dependencies match your Minecraft 26.3 installation before launching. The download button points to the GitHub release asset supplied by the project owner.</div>
+    <div class="kicker">03 / READY WHEN YOU ARE</div>
+    <h2>Enter the next session.</h2>
+    <p>
+      Download the linked 3.3.0 build from GitHub. The URL uses
+      release tag <b>v3.1.0</b> and asset name
+      <b>feather-meteor-3.3.0.jar</b>; make sure that exact asset
+      exists in that release.
+    </p>
   </div>
+
+  <a class="btn primary"
+     href="https://github.com/plfake39-dev/Feather_meteor-client/releases/download/v3.1.0/feather-meteor-3.3.0.jar"
+     target="_blank" rel="noopener">
+     DOWNLOAD 3.3.0 ↗
+  </a>
 </section>
+
 </main>
+
+<footer>
+  <span>© FEATHER METEOR</span>
+  <span>CRAFTED FOR THE NEXT SESSION · FABRIC / 26.3</span>
+</footer>
+
 </div>
-<footer><div class="shell foot"><small>© 2026 FEATHER METEOR · COMMUNITY PROJECT</small><a href="https://github.com/plfake39-dev/Feather_meteor-client">VIEW SOURCE REPOSITORY ↗</a></div></footer>
 </body>
-</html>
+  </html>
