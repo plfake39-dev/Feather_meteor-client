@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f1eb">
+<meta name="description" content="Feather Meteor 3.2.0 — a Minecraft 26.3 Fabric client.">
+<title>Feather Meteor — Crafted for 26.3</title>
+<style>
+:root{--paper:#f4f1eb;--ink:#171714;--muted:#77766f;--line:#d8d4cb;--accent:#c35a37;--dark:#1d1e1b;--cream:#e9e4d9}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}
+.shell{width:min(1180px,calc(100% - 48px));margin:auto}
+nav{height:84px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.wordmark{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:900;letter-spacing:.17em}
+.symbol{width:35px;height:35px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:18px}
+.nav-right{font-size:11px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+.hero{display:grid;grid-template-columns:1.04fr .96fr;gap:8%;align-items:center;padding:90px 0 86px}
+.kicker{display:flex;align-items:center;gap:12px;color:var(--accent);font-size:11px;font-weight:850;letter-spacing:.2em;text-transform:uppercase}
+.kicker:before{content:"";width:34px;height:1px;background:var(--accent)}
+h1{font-size:clamp(58px,8.4vw,112px);line-height:.88;letter-spacing:-.085em;font-weight:850;margin:25px 0 24px}
+h1 span{display:block;color:var(--accent);font-family:Georgia,serif;font-style:italic;font-weight:500;letter-spacing:-.075em}
+.lede{max-width:470px;color:#5e5d57;font-size:17px;line-height:1.8}
+.actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:34px}
+.download{display:inline-flex;align-items:center;gap:22px;background:var(--ink);color:white;text-decoration:none;padding:17px 21px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:background .2s,transform .2s}
+.download:hover{background:var(--accent);transform:translateY(-2px)}
+.download .arrow{font-size:20px;font-weight:400}
+.release-link{font-size:12px;color:var(--muted);text-decoration:none;border-bottom:1px solid #aaa69d;padding-bottom:4px}
+.visual{min-height:480px;background:var(--dark);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.visual:before{content:"";position:absolute;width:430px;height:430px;border:1px solid #77786d;border-radius:50%;opacity:.38}
+.visual:after{content:"";position:absolute;width:330px;height:330px;border:1px solid #77786d;border-radius:50%;opacity:.32}
+.orbit{position:absolute;width:470px;height:180px;border:1px solid #bd6647;border-radius:50%;transform:rotate(-37deg)}
+.core{position:relative;z-index:2;width:210px;height:260px;display:flex;align-items:center;justify-content:center}
+.feather{font-size:180px;line-height:1;color:#eee9dd;transform:rotate(-28deg);text-shadow:10px 14px 0 #c35a37}
+.visual-caption{position:absolute;bottom:25px;left:28px;right:28px;display:flex;justify-content:space-between;color:#aaa99f;font-size:9px;letter-spacing:.19em;text-transform:uppercase}
+.visual-index{position:absolute;top:24px;left:28px;color:#aaa99f;font-size:10px;letter-spacing:.2em}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.spec{padding:24px 20px 25px 0;border-right:1px solid var(--line);margin:18px 0 18px 20px}
+.spec:first-child{margin-left:0}
+.spec:last-child{border:0}
+.spec small{display:block;color:var(--muted);font-size:9px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.spec strong{font-size:15px;font-weight:750}
+.lower{display:grid;grid-template-columns:1fr 1fr;gap:9%;padding:80px 0}
+.lower h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.055em;line-height:1.05;margin:0}
+.lower p{margin:0;color:#66655e;line-height:1.85;font-size:14px}
+.note{padding:19px 22px;background:#e9e4d9;border-left:2px solid var(--accent);font-size:12px;color:#55534d;line-height:1.7;margin-top:25px}
+footer{background:var(--dark);color:#e9e4d9;padding:30px 0}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot small{color:#aaa99f;font-size:10px;letter-spacing:.12em}
+.foot a{font-size:11px;text-decoration:none;border-bottom:1px solid #777;padding-bottom:4px}
+@media(max-width:780px){.shell{width:min(100% - 34px,600px)}nav{height:70px}.nav-right{font-size:9px}.hero{grid-template-columns:1fr;padding:62px 0 52px;gap:40px}.visual{min-height:360px}.core{transform:scale(.78)}.visual:before{width:320px;height:320px}.visual:after{width:245px;height:245px}.orbit{width:350px}.specs{grid-template-columns:repeat(2,1fr)}.spec:nth-child(2){border-right:0}.spec:nth-child(3){margin-left:0}.lower{grid-template-columns:1fr;gap:20px;padding:55px 0}}
+@media(max-width:420px){h1{font-size:58px}.actions{align-items:flex-start;flex-direction:column}.download{width:100%;justify-content:space-between}.visual{min-height:320px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<nav>
+  <div class="wordmark"><span class="symbol">✦</span><span>FEATHER / METEOR</span></div>
+  <div class="nav-right">Independent client project · 2026</div>
+</nav>
+
+<main>
+<section class="hero">
+  <div>
+    <div class="kicker">Minecraft Fabric Client</div>
+    <h1>Play beyond<span>ordinary.</span></h1>
+    <p class="lede">Meet Feather Meteor 3.2.0 — a custom client build prepared for Minecraft 26.3 with the Fabric mod loader.</p>
+    <div class="actions">
+      <a class="download" href="https://github.com/plfake39-dev/Feather_meteor-client/releases/download/v3.1.0/feather-meteor-3.2.0.jar">
+        <span>Get the client</span><span class="arrow">↗</span>
+      </a>
+      <a class="release-link" href="https://github.com/plfake39-dev/Feather_meteor-client/releases">Release archive</a>
+    </div>
+  </div>
+  <div class="visual" aria-label="Abstract feather and orbit artwork">
+    <div class="visual-index">FM — 032</div>
+    <div class="orbit"></div>
+    <div class="core"><span class="feather">✦</span></div>
+    <div class="visual-caption"><span>Feather Meteor</span><span>Version 3.2.0</span></div>
+  </div>
+</section>
+
+<section class="specs" aria-label="Release specifications">
+  <div class="spec"><small>Client release</small><strong>3.2.0</strong></div>
+  <div class="spec"><small>Minecraft</small><strong>26.3</strong></div>
+  <div class="spec"><small>Mod loader</small><strong>Fabric</strong></div>
+  <div class="spec"><small>Package</small><strong>Java · JAR</strong></div>
+</section>
+
+<section class="lower">
+  <h2>Designed to feel different.<br><em>Built for your next world.</em></h2>
+  <div>
+    <p>Feather Meteor brings its own identity to a Fabric-based Minecraft setup. Download the release package and use it only with a compatible Minecraft and Fabric environment.</p>
+    <div class="note"><strong>Compatibility note</strong><br>Confirm that this build and its dependencies match your Minecraft 26.3 installation before launching. The download button points to the GitHub release asset supplied by the project owner.</div>
+  </div>
+</section>
+</main>
+</div>
+<footer><div class="shell foot"><small>© 2026 FEATHER METEOR · COMMUNITY PROJECT</small><a href="https://github.com/plfake39-dev/Feather_meteor-client">VIEW SOURCE REPOSITORY ↗</a></div></footer>
+</body>
+</html>
